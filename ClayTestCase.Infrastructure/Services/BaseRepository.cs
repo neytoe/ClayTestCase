@@ -32,12 +32,12 @@ namespace ClayTestCase.Infrastructure.Services
             var entity = await entitySet.FindAsync(id);
             return entity != null ? true : false;
         }
-        public async Task<T> Find(int? id)
+        public virtual async Task<T> Find(int? id)
         {
             var entity = await entitySet.FindAsync(id);
             return entity;
         }
-        public async Task<IEnumerable<T>> FindAll()
+        public virtual async Task<IEnumerable<T>> FindAll()
         {
             return await entitySet.ToListAsync();
         }

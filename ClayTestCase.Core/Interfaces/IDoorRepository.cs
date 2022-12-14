@@ -9,5 +9,6 @@ namespace ClayTestCase.Core.Interfaces
 {
     public interface IDoorRepository : IRepository<Door>
     {
+
     }
 }

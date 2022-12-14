@@ -1,4 +1,5 @@
 ﻿using ClayTestCase.Core.Dtos;
+using ClayTestCase.Core.Interfaces;
 using ClayTestCase.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,17 +12,34 @@ namespace ClayTestCase.API.Controllers
     [ApiController]
     public class DoorController : ControllerBase
     {
-        private readonly AssessmentDataContext _ctx;
+        private readonly IDoorRepository _doorRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public DoorController(AssessmentDataContext ctx)
+        public DoorController(IDoorRepository doorRepository, IEmployeeRepository employeeRepository)
         {
-            _ctx = ctx;
+            _doorRepository = doorRepository;
+            _employeeRepository = employeeRepository;
         }
+
 
         [HttpPost("")]
-        public Action OpenDoor(int userid, int doorId)
+        public async Task<ActionResult> OpenDoor(int userid, int doorId)
         {
-            var User = _ctx.
+            var user = await _employeeRepository.Find(userid);
+            var door = await _doorRepository.Find(doorId);
+
+            if (user == null || door == null)
+                return NotFound();
+            if (!door.AccessRoles.Select(x => x.Name).Contains(user.Role)){
+                return Unauthorized();
+            }
+
+            return Ok();
         }
+
+        [Authorize(Policy = "Admin", "User")]
+
+
+
     }
 }
