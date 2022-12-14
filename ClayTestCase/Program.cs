@@ -1,5 +1,7 @@
 using ClayTestCase.Core.Helper;
+using ClayTestCase.Core.Interfaces;
 using ClayTestCase.Infrastructure;
+using ClayTestCase.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.AddDbContext<AssessmentDataContext>(x => x.UseSqlite(connectionString));
+builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+builder.Services.AddScoped<IDoorRepository,DoorRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
