@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "ms1nIxZmVgoGO5bNETXCT5DT4DpmDaPff/pW8kox0vYcfqsbfhRUBobzL9dXs6WkDD8zlGL4TxhB6Z+/TgDIHw==",
+  "dgSpecHash": "p39T7Zj5m1nXN82VofdtZj4KJZ5Ay6wiCNJCyMysEdzlZtkyE4CSLwKihobv1423cwrI3jHRyEIKYDbyH7qCsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.authorization\\7.0.0\\microsoft.aspnetcore.authorization.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.metadata\\7.0.0\\microsoft.aspnetcore.metadata.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

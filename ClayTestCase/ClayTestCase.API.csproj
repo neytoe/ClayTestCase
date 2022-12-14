@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Enitities\" />
+    <ProjectReference Include="..\ClayTestCase.Infrastructure\ClayTestCase.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
