@@ -12,8 +12,5 @@ namespace ClayTestCase.Core.Enitities
         public string Name { get; set; }
         public bool IsLocked { get; set; }
         public ICollection<AccessRoles> AccessRoles { get; set; }
-
-        public int OfficeId { get; set; }
-        public Office Office { get; set; }
     }
 }

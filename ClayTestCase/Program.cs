@@ -1,8 +1,14 @@
+using ClayTestCase.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<AssessmentDataContext>(x => x.UseSqlite(connectionString));
+
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ElevatedRights", policy =>
