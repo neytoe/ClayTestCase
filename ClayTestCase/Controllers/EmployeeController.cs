@@ -4,8 +4,9 @@ namespace ClayTestCase.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-       
+     
+        public 
     }
 }
