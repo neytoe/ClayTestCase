@@ -7,6 +7,6 @@ namespace ClayTestCase.Controllers
     public class EmployeeController : ControllerBase
     {
      
-        public 
+        
     }
 }

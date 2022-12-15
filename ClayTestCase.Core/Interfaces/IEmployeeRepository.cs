@@ -1,4 +1,5 @@
-﻿using ClayTestCase.Core.Enitities;
+﻿using ClayTestCase.Core.Dtos;
+using ClayTestCase.Core.Enitities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace ClayTestCase.Core.Interfaces
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
+        ValueTask<(string, Employee, string)> LoginUser(LoginDto model);
     }
 }

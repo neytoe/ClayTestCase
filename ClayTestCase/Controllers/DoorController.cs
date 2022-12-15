@@ -37,7 +37,6 @@ namespace ClayTestCase.API.Controllers
             return Ok();
         }
 
-        [Authorize(Policy = "Admin", "User")]
 
 
 
