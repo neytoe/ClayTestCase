@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClayTestCase.Core.Enitities
 {
-    public class Door
+    public class AccessRole
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsLocked { get; set; } = true;
-        public IList<DoorAccessRole> DoorAccessRoles { get; set; }
 
+        public IList<DoorAccessRole> DoorAccessRoles { get; set; }
     }
 }

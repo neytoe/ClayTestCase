@@ -32,11 +32,13 @@ namespace ClayTestCase.Infrastructure.Services
                 if (hasAccount) { return (null, null, "user already exists"); }
 
                 string passwordHash = GetHashedValue(model.Password);
+                var role = await  _dataContext.AccessRoles.FirstOrDefaultAsync(x => x.Id == model.RoleId);
+                if (role == null) return (null, null, "Role Does not exist");
                 Employee user = new Employee
                 {
                     Email = model.Email,
                     PasswordHash = passwordHash,
-                    Role = model.Role,
+                    Role = role.Name,
                     Name = model.Name,
                 };
                 user.PasswordHash = passwordHash;

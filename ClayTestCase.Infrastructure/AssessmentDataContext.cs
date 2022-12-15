@@ -14,8 +14,9 @@ namespace ClayTestCase.Infrastructure
         {
         }
 
-        public DbSet<AccessRoles> AccessRoles { get; set; }
+        public DbSet<AccessRole> AccessRoles { get; set; }
         public DbSet<Door> Doors { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<DoorAccessRole> DoorAccessRoles { get; set; }
     }
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClayTestCase.Core.Interfaces
+namespace ClayTestCase.Core.Dtos
 {
-    public interface IDoorRepository : IRepository<Door>
+    public class CreateDoorDto
     {
-        Task<bool> OpenDoor(int doorId, string role);
+        public string Name { get; set; }
+        public ICollection<AccessRole> AccessRoles { get; set; }
     }
 }

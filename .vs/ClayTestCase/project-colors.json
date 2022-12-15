@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "3829c560-575f-427c-aa00-10654628c23b": {
+      "ProjectGuid": "3829c560-575f-427c-aa00-10654628c23b",
+      "DisplayName": "ClayTestCase.Core",
+      "ColorIndex": 0
+    },
+    "b99d6092-75ea-4b95-b3f9-537348d249cf": {
+      "ProjectGuid": "b99d6092-75ea-4b95-b3f9-537348d249cf",
+      "DisplayName": "ClayTestCase.Infrastructure",
+      "ColorIndex": 1
+    },
+    "1eb37b93-69d0-4c7c-a3da-91057dca483a": {
+      "ProjectGuid": "1eb37b93-69d0-4c7c-a3da-91057dca483a",
+      "DisplayName": "ClayTestCase.API",
+      "ColorIndex": 2
+    },
+    "f68c3f22-d816-4ea2-aa6a-ff4c79f1f033": {
+      "ProjectGuid": "f68c3f22-d816-4ea2-aa6a-ff4c79f1f033",
+      "DisplayName": "ClayTestCase.Test",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}

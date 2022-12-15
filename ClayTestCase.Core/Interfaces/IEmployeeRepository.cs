@@ -10,6 +10,7 @@ namespace ClayTestCase.Core.Interfaces
 {
     public interface IEmployeeRepository : IRepository<Employee>
     {
+        ValueTask<(string, Employee, string)> RegisterUser(RegisterDto model);
         ValueTask<(string, Employee, string)> LoginUser(LoginDto model);
     }
 }

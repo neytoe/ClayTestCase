@@ -16,10 +16,30 @@ namespace ClayTestCase.Infrastructure.Services
         {
         }
 
-        public override async Task<Door> Find(int? doorId )
+        //public override async Task<Door> Find(int? doorId)
+        //{
+        //    var door = await _dataContext.Doors.Include(x => x.AccessRoles).FirstOrDefaultAsync(x => x.Id == doorId);
+        //    return door;
+        //}
+
+        public async Task<bool> OpenDoor(int doorId, string role)
         {
-            var door = await _dataContext.Doors.Include(x => x.AccessRoles).FirstOrDefaultAsync(x => x.Id == doorId); 
-            return door;
+            var door = _dataContext.Doors.Include(x => x.DoorAccessRoles).ThenInclude(x => x.AccessRole).FirstOrDefault(x => x.Id == doorId);
+            if (String.IsNullOrEmpty(role) || door == null)
+            {
+                return false;
+            }
+            else
+            {
+                var allowedRoles = door.DoorAccessRoles.Select(x => x.AccessRole.Name);
+                if (allowedRoles != null && allowedRoles.Any())
+                {
+                    if (allowedRoles.Contains(role))
+                        return true;
+                }                
+            }
+            return false;
         }
+
     }
 }

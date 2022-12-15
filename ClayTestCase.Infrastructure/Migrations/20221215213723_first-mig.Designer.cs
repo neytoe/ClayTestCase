@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClayTestCase.Infrastructure.Migrations
 {
     [DbContext(typeof(AssessmentDataContext))]
-    [Migration("20221214200556_firstmig")]
+    [Migration("20221215213723_first-mig")]
     partial class firstmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace ClayTestCase.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.11");
 
-            modelBuilder.Entity("ClayTestCase.Core.Enitities.AccessRoles", b =>
+            modelBuilder.Entity("ClayTestCase.Core.Enitities.AccessRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,17 +52,30 @@ namespace ClayTestCase.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("OfficeId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Doors");
+                });
+
+            modelBuilder.Entity("ClayTestCase.Core.Enitities.DoorAccessRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("OfficeId1")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("AccessRoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DoorId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfficeId1");
+                    b.HasIndex("AccessRoleId");
 
-                    b.ToTable("Doors");
+                    b.HasIndex("DoorId");
+
+                    b.ToTable("DoorAccessRoles");
                 });
 
             modelBuilder.Entity("ClayTestCase.Core.Enitities.Employee", b =>
@@ -71,7 +84,15 @@ namespace ClayTestCase.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -84,47 +105,35 @@ namespace ClayTestCase.Infrastructure.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("ClayTestCase.Core.Enitities.Office", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Office");
-                });
-
-            modelBuilder.Entity("ClayTestCase.Core.Enitities.AccessRoles", b =>
+            modelBuilder.Entity("ClayTestCase.Core.Enitities.AccessRole", b =>
                 {
                     b.HasOne("ClayTestCase.Core.Enitities.Door", null)
                         .WithMany("AccessRoles")
                         .HasForeignKey("DoorId");
                 });
 
-            modelBuilder.Entity("ClayTestCase.Core.Enitities.Door", b =>
+            modelBuilder.Entity("ClayTestCase.Core.Enitities.DoorAccessRole", b =>
                 {
-                    b.HasOne("ClayTestCase.Core.Enitities.Office", "Office")
-                        .WithMany("Doors")
-                        .HasForeignKey("OfficeId1")
+                    b.HasOne("ClayTestCase.Core.Enitities.AccessRole", "AccessRole")
+                        .WithMany()
+                        .HasForeignKey("AccessRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Office");
+                    b.HasOne("ClayTestCase.Core.Enitities.Door", "Door")
+                        .WithMany()
+                        .HasForeignKey("DoorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AccessRole");
+
+                    b.Navigation("Door");
                 });
 
             modelBuilder.Entity("ClayTestCase.Core.Enitities.Door", b =>
                 {
                     b.Navigation("AccessRoles");
-                });
-
-            modelBuilder.Entity("ClayTestCase.Core.Enitities.Office", b =>
-                {
-                    b.Navigation("Doors");
                 });
 #pragma warning restore 612, 618
         }

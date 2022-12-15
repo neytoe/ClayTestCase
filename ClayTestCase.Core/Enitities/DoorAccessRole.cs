@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace ClayTestCase.Core.Enitities
 {
-    public class AccessRoles
+    public class DoorAccessRole
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public Door Door { get; set; }
+        public int DoorId { get; set; }
+
+        public int AccessRoleId { get; set; }
+        public AccessRole AccessRole { get; set; }
     }
 }
