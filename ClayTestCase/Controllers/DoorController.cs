@@ -33,7 +33,6 @@ namespace ClayTestCase.API.Controllers
         {
             var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
             var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            //var user = await _employeeRepository.Find(userid);
             var IsOpen = await _doorRepository.OpenDoor(doorId, role);
 
             if (IsOpen)
@@ -41,6 +40,36 @@ namespace ClayTestCase.API.Controllers
 
             return BadRequest();
         }
+
+        [Authorize(Roles = "StoreKeeper")]
+        [HttpPost("GetDoorHistory/{doorId}")]
+        public async Task<ActionResult> GetDoorHistory(int doorId)
+        {
+            var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+            var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            //var user = await _employeeRepository.Find(userid);
+            var IsOpen = await _doorRepository.OpenDoor(doorId, role);
+
+            if (IsOpen)
+                return Ok();
+
+            return BadRequest();
+        }
+
+        //[Authorize(Roles = "StoreKeeper")]
+        //[HttpPost("GetDoorHistory/{doorId}")]
+        //public async Task<ActionResult> GetAllDoorsHistory()
+        //{
+        //    var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+        //    var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+        //    //var user = await _employeeRepository.Find(userid);
+        //    var IsOpen = await _doorRepository.OpenDoor(doorId, role);
+
+        //    if (IsOpen)
+        //        return Ok();
+
+        //    return BadRequest();
+        //}
 
         //[Authorize]
         //[HttpPost("CreateDoor")]

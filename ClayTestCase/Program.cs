@@ -19,6 +19,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<AssessmentDataContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDoorRepository, DoorRepository>();
+builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
