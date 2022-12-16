@@ -12,5 +12,6 @@ namespace ClayTestCase.Core.Interfaces
     {
         ValueTask<(string, Employee, string)> RegisterUser(RegisterDto model);
         ValueTask<(string, Employee, string)> LoginUser(LoginDto model);
+        Task<Employee> FindUserByEmail(string email);
     }
 }

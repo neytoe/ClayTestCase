@@ -11,8 +11,9 @@ namespace ClayTestCase.Core.Enitities
         public int Id { get; set; }
         public int DoorId { get; set; }
         public int EmployeeId { get; set; } 
-        public string EmployeeName { get; set; }
+        public string EmployeeEmail{ get; set; }
         public string EmployeeRole { get; set; }
+        public bool IsAccessGranted { get; set; }
         public DateTime Date { get; set; }
 
 

@@ -17,13 +17,15 @@ namespace ClayTestCase.API.Controllers
         private readonly IDoorRepository _doorRepository;
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly IActivityLogRepository _activityLogRepository;
 
         public DoorController(IDoorRepository doorRepository, IEmployeeRepository employeeRepository,
-            IHttpContextAccessor httpContext)
+            IHttpContextAccessor httpContext, IActivityLogRepository activityLogRepository)
         {
             _doorRepository = doorRepository;
             _employeeRepository = employeeRepository;
             _httpContext = httpContext;
+            _activityLogRepository = activityLogRepository;
         }
 
 
@@ -33,27 +35,39 @@ namespace ClayTestCase.API.Controllers
         {
             var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
             var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            var IsOpen = await _doorRepository.OpenDoor(doorId, role);
+            var user = await _employeeRepository.FindUserByEmail(email);
+            var IsAccessGranted = await _doorRepository.OpenDoor(doorId, role);
 
-            if (IsOpen)
-                return Ok();          
+            if (IsAccessGranted && user != null)
+            {
+                await _activityLogRepository.SaveActivity(doorId, user, IsAccessGranted);
+                return Ok("Door Opened Successfully");
+            }
 
-            return BadRequest();
+            await _activityLogRepository.SaveActivity(doorId, user, IsAccessGranted);
+            return BadRequest("Invalid Request");
         }
 
         [Authorize(Roles = "StoreKeeper")]
-        [HttpPost("GetDoorHistory/{doorId}")]
+        [HttpGet("GetDoorHistory/{doorId}")]
         public async Task<ActionResult> GetDoorHistory(int doorId)
         {
-            var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
-            var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            //var user = await _employeeRepository.Find(userid);
-            var IsOpen = await _doorRepository.OpenDoor(doorId, role);
+            
+            var history = await _activityLogRepository.Find(doorId);
+            if (history != null) return Ok(history);
 
-            if (IsOpen)
-                return Ok();
+            return BadRequest("An error Occured");
+        }
 
-            return BadRequest();
+        [Authorize(Roles = "StoreKeeper")]
+        [HttpGet("GetAllDoorHistory")]
+        public async Task<ActionResult> GetAllDoorHistory()
+        {
+
+            var history = await _activityLogRepository.FindAll();
+            if (history.Any()) return Ok(history);
+
+            return BadRequest("An error Occured");
         }
 
         //[Authorize(Roles = "StoreKeeper")]

@@ -9,5 +9,6 @@ namespace ClayTestCase.Core.Interfaces
 {
     public interface IActivityLogRepository : IRepository<ActivityLog>
     {
+        Task<(bool, string)> SaveActivity(int doorId, Employee model, bool IsDoorOpen);
     }
 }

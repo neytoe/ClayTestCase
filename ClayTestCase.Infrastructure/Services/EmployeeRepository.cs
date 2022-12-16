@@ -24,6 +24,8 @@ namespace ClayTestCase.Infrastructure.Services
             _settings = settings.Value;
         }
 
+
+
         public async ValueTask<(string, Employee, string)> RegisterUser(RegisterDto model)
         {
             if (model.Password == model.ConfirmPassword)
@@ -32,7 +34,7 @@ namespace ClayTestCase.Infrastructure.Services
                 if (hasAccount) { return (null, null, "user already exists"); }
 
                 string passwordHash = GetHashedValue(model.Password);
-                var role = await  _dataContext.AccessRoles.FirstOrDefaultAsync(x => x.Id == model.RoleId);
+                var role = await _dataContext.AccessRoles.FirstOrDefaultAsync(x => x.Id == model.RoleId);
                 if (role == null) return (null, null, "Role Does not exist");
                 Employee user = new Employee
                 {
@@ -54,7 +56,7 @@ namespace ClayTestCase.Infrastructure.Services
                 }
                 return (await LoginUser(new LoginDto { Email = model.Email, Password = model.Password }));
             }
-            return (null, null, "password must match");
+            return (null, null, "An error Occurred");
 
         }
 
@@ -64,12 +66,12 @@ namespace ClayTestCase.Infrastructure.Services
             var user = await _dataContext.Employees.FirstOrDefaultAsync(x => x.Email == model.Email);
 
 
-            if (user == null) { return (null, null, "no such user in the database"); }
+            if (user == null) { return (null, null, "no user found"); }
 
             string incomingHash = GetHashedValue(loginPassword);
             if (incomingHash != user.PasswordHash)
             {
-                return (null, null, "password do not match");
+                return (null, null, "Incorrect Password");
             }
             return (GetToken(model.Email, user.Role), user, null);
         }
@@ -111,6 +113,15 @@ namespace ClayTestCase.Infrastructure.Services
                 );
             //return a writable token
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<Employee> FindUserByEmail(string email)
+        {
+            var user = new Employee();
+           if(string.IsNullOrEmpty(email)) return user;
+           
+           user = await _dataContext.Employees.FirstOrDefaultAsync(x => x.Email == email);
+           return user;
         }
     }
 }
