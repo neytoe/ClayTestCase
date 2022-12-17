@@ -1,7 +1,9 @@
+using ClayTestCase.Core.DataAccess.Interfaces;
 using ClayTestCase.Core.Helper;
-using ClayTestCase.Core.Interfaces;
+using ClayTestCase.Core.Services.Implementation;
+using ClayTestCase.Core.Services.Interfaces;
 using ClayTestCase.Infrastructure;
-using ClayTestCase.Infrastructure.Services;
+using ClayTestCase.Infrastructure.DataAccess.Implementation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,10 +18,15 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<AssessmentDataContext>(x => x.UseSqlite(connectionString));
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDoorRepository, DoorRepository>();
 builder.Services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
+builder.Services.AddScoped<IActivityLogService, ActivityLogService>();
+builder.Services.AddScoped<IDoorService, DoorService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IAccessRoleRepository, AccessRoleRepository>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -41,7 +48,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlachePixels API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartCard API", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",

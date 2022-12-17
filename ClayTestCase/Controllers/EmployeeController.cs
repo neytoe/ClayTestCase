@@ -1,5 +1,6 @@
+using ClayTestCase.Core.DataAccess.Interfaces;
 using ClayTestCase.Core.Dtos;
-using ClayTestCase.Core.Interfaces;
+using ClayTestCase.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,14 +11,11 @@ namespace ClayTestCase.Controllers
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
+        private readonly IEmployeeService _employeeService;
 
-        private readonly IDoorRepository _doorRepository;
-        private readonly IEmployeeRepository _employeeRepository;
-
-        public EmployeeController(IDoorRepository doorRepository, IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _doorRepository = doorRepository;
-            _employeeRepository = employeeRepository;
+            _employeeService = employeeService;
         }
 
 
@@ -25,7 +23,7 @@ namespace ClayTestCase.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto model)
         {
-            var result = await _employeeRepository.LoginUser(model);
+            var result = await _employeeService.LoginUser(model);
             if (result.Item2  != null) return Ok(new { Token = result.Item1 });
             return BadRequest(result);
         }
@@ -35,7 +33,7 @@ namespace ClayTestCase.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterDto model)
         {
-            var result = await _employeeRepository.RegisterUser(model);
+            var result = await _employeeService.RegisterUser(model);
             if (result.Item2 != null) return Ok(new { Token = result.Item1 });
             return BadRequest(result);
         }

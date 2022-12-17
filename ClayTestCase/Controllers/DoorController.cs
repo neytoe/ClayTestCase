@@ -1,7 +1,4 @@
-﻿using ClayTestCase.Core.Dtos;
-using ClayTestCase.Core.Enitities;
-using ClayTestCase.Core.Interfaces;
-using ClayTestCase.Infrastructure;
+﻿using ClayTestCase.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,18 +11,15 @@ namespace ClayTestCase.API.Controllers
     [ApiController]
     public class DoorController : ControllerBase
     {
-        private readonly IDoorRepository _doorRepository;
-        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IDoorService _doorService;
         private readonly IHttpContextAccessor _httpContext;
-        private readonly IActivityLogRepository _activityLogRepository;
+        private readonly IActivityLogService _activityLogService;
 
-        public DoorController(IDoorRepository doorRepository, IEmployeeRepository employeeRepository,
-            IHttpContextAccessor httpContext, IActivityLogRepository activityLogRepository)
+        public DoorController(IDoorService doorService, IHttpContextAccessor httpContext, IActivityLogService activityLogService)
         {
-            _doorRepository = doorRepository;
-            _employeeRepository = employeeRepository;
+            _doorService = doorService;
             _httpContext = httpContext;
-            _activityLogRepository = activityLogRepository;
+            _activityLogService = activityLogService;
         }
 
 
@@ -35,16 +29,15 @@ namespace ClayTestCase.API.Controllers
         {
             var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
             var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            var user = await _employeeRepository.FindUserByEmail(email);
-            var IsAccessGranted = await _doorRepository.OpenDoor(doorId, role);
+            var IsAccessGranted = await _doorService.OpenDoor(doorId, role);           
 
-            if (IsAccessGranted && user != null)
+            if (IsAccessGranted)
             {
-                await _activityLogRepository.SaveActivity(doorId, user, IsAccessGranted);
+                await _activityLogService.SaveActivity(doorId, IsAccessGranted, email);
                 return Ok("Door Opened Successfully");
             }
 
-            await _activityLogRepository.SaveActivity(doorId, user, IsAccessGranted);
+            await _activityLogService.SaveActivity(doorId,IsAccessGranted, email);
             return BadRequest("Invalid Request");
         }
 
@@ -53,8 +46,8 @@ namespace ClayTestCase.API.Controllers
         public async Task<ActionResult> GetDoorHistory(int doorId)
         {
             
-            var history = await _activityLogRepository.Find(doorId);
-            if (history != null) return Ok(history);
+            var activityLog = await _activityLogService.GetDoorHistory(doorId);
+            if (activityLog != null) return Ok(activityLog);
 
             return BadRequest("An error Occured");
         }
@@ -64,46 +57,30 @@ namespace ClayTestCase.API.Controllers
         public async Task<ActionResult> GetAllDoorHistory()
         {
 
-            var history = await _activityLogRepository.FindAll();
-            if (history.Any()) return Ok(history);
+            var activityLogs = await _activityLogService.GetAllDoorHistory();
+            if (activityLogs.Any()) return Ok(activityLogs);
+            if (!activityLogs.Any()) return NoContent();
 
             return BadRequest("An error Occured");
         }
 
-        //[Authorize(Roles = "StoreKeeper")]
-        //[HttpPost("GetDoorHistory/{doorId}")]
-        //public async Task<ActionResult> GetAllDoorsHistory()
-        //{
-        //    var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
-        //    var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-        //    //var user = await _employeeRepository.Find(userid);
-        //    var IsOpen = await _doorRepository.OpenDoor(doorId, role);
-
-        //    if (IsOpen)
-        //        return Ok();
-
-        //    return BadRequest();
-        //}
-
-        //[Authorize]
+        //[Authorize(Roles = "Admin")]
         //[HttpPost("CreateDoor")]
         //public async Task<ActionResult> CreateDoor(CreateDoorDto model)
         //{
-        //    if (model == null) return BadRequest();
-        //    var door = new Door
+        //    var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
+        //    var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+        //    var IsAccessGranted = await _doorService.CreateDoor(model);
+
+        //    if (IsAccessGranted)
         //    {
-        //        Name = model.Name,
-        //        AccessRoles = model.AccessRoles,
-        //    };
+        //        await _activityLogService.SaveActivity(doorId, IsAccessGranted, email);
+        //        return Ok("Door Opened Successfully");
+        //    }
 
-        //    var accessRoles = new Access 
-        //    var newdoor = _doorRepository.Save(
-
-
+        //    await _activityLogService.SaveActivity(doorId, IsAccessGranted, email);
+        //    return BadRequest("Invalid Request");
         //}
-
-
-
 
     }
 }
