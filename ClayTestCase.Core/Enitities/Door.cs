@@ -10,7 +10,6 @@ namespace ClayTestCase.Core.Enitities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //public bool IsLocked { get; set; } = true;
         public IList<DoorAccessRole> DoorAccessRoles { get; set; }
 
     }

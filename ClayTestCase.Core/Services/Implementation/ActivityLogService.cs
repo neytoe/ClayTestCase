@@ -16,10 +16,10 @@ namespace ClayTestCase.Core.Services.Implementation
         private readonly IActivityLogRepository _activityLogRepository;
         private readonly IEmployeeRepository _employeeRepository;
 
-        public ActivityLogService(IServiceProvider serviceProvider)
+        public ActivityLogService(IActivityLogRepository activityLogRepository, IEmployeeRepository employeeRepository)
         {
-            _activityLogRepository = serviceProvider.GetRequiredService<IActivityLogRepository>();
-            _employeeRepository = serviceProvider.GetRequiredService<IEmployeeRepository>();
+            _activityLogRepository = activityLogRepository;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<IEnumerable<ActivityLog>> GetAllDoorHistory()
@@ -29,16 +29,6 @@ namespace ClayTestCase.Core.Services.Implementation
             if (activityLogs.Any()) return activityLogs;
 
             return activityLogs;
-        }
-
-        public async Task<ActivityLog> GetDoorHistory(int doorId)
-        {
-            ActivityLog activityLog;
-            activityLog = await _activityLogRepository.Find(doorId);
-            if (activityLog != null) return activityLog;
-
-            return activityLog;
-           
         }
 
         public async ValueTask<(bool, string)> SaveActivity(int doorId, bool IsAccessGranted, string email)

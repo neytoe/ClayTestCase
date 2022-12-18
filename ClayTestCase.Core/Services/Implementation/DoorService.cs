@@ -21,13 +21,6 @@ namespace ClayTestCase.Core.Services.Implementation
             _accessRoleRepository = serviceProvider.GetRequiredService<IAccessRoleRepository>();
         }
 
-        //public Task<bool> CreateDoor(CreateDoorDto model)
-        //{
-        //    if (model != null)
-        //    {
-
-        //    }
-        //}
 
         public async Task<bool> OpenDoor(int doorId, string role)
         {

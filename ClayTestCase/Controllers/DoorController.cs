@@ -42,17 +42,6 @@ namespace ClayTestCase.API.Controllers
         }
 
         [Authorize(Roles = "StoreKeeper")]
-        [HttpGet("GetDoorHistory/{doorId}")]
-        public async Task<ActionResult> GetDoorHistory(int doorId)
-        {
-            
-            var activityLog = await _activityLogService.GetDoorHistory(doorId);
-            if (activityLog != null) return Ok(activityLog);
-
-            return BadRequest("An error Occured");
-        }
-
-        [Authorize(Roles = "StoreKeeper")]
         [HttpGet("GetAllDoorHistory")]
         public async Task<ActionResult> GetAllDoorHistory()
         {
@@ -63,24 +52,6 @@ namespace ClayTestCase.API.Controllers
 
             return BadRequest("An error Occured");
         }
-
-        //[Authorize(Roles = "Admin")]
-        //[HttpPost("CreateDoor")]
-        //public async Task<ActionResult> CreateDoor(CreateDoorDto model)
-        //{
-        //    var role = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Role).Value;
-        //    var email = _httpContext.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-        //    var IsAccessGranted = await _doorService.CreateDoor(model);
-
-        //    if (IsAccessGranted)
-        //    {
-        //        await _activityLogService.SaveActivity(doorId, IsAccessGranted, email);
-        //        return Ok("Door Opened Successfully");
-        //    }
-
-        //    await _activityLogService.SaveActivity(doorId, IsAccessGranted, email);
-        //    return BadRequest("Invalid Request");
-        //}
 
     }
 }
