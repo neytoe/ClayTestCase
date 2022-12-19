@@ -1,4 +1,5 @@
-﻿using ClayTestCase.Core.Enitities;
+﻿using ClayTestCase.Core.Dtos;
+using ClayTestCase.Core.Enitities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace ClayTestCase.Core.Services.Interfaces
     public interface IActivityLogService 
     {
         ValueTask<(bool, string)> SaveActivity(int doorId, bool IsAccessGranted, string email);
-        Task<IEnumerable<ActivityLog>> GetAllDoorHistory();
+        Task<List<ActivityLogDto>> GetAllDoorHistory();
     }
 }

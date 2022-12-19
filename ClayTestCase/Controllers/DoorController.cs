@@ -46,7 +46,7 @@ namespace ClayTestCase.API.Controllers
         public async Task<ActionResult> GetAllDoorHistory()
         {
 
-            var activityLogs = await _activityLogService.GetAllDoorHistory();
+            var activityLogs = await _activityLogService.GetAllDoorHistory();            
             if (activityLogs.Any()) return Ok(activityLogs);
             if (!activityLogs.Any()) return NoContent();
 
