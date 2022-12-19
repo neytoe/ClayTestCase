@@ -1,5 +1,6 @@
 ﻿using ClayTestCase.Core.DataAccess.Interfaces;
 using ClayTestCase.Core.Enitities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClayTestCase.Infrastructure.DataAccess.Implementation
 {
@@ -7,6 +8,6 @@ namespace ClayTestCase.Infrastructure.DataAccess.Implementation
     {
         public ActivityLogRepository(AssessmentDataContext dataContext) : base(dataContext)
         {
-        }       
+        }
     }
 }
