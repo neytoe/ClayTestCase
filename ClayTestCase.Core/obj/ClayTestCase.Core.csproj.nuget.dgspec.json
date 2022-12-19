@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {}
+    "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {
+    "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj",
+        "projectUniqueName": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj",
         "projectName": "ClayTestCase.Core",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj",
+        "projectPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\obj\\",
+        "outputPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -7928,11 +7928,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Test\\ClayTestCase.Test.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Test\\ClayTestCase.Test.csproj",
       "projectName": "ClayTestCase.Test",
-      "projectPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Test\\ClayTestCase.Test.csproj",
+      "projectPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Test\\ClayTestCase.Test.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Test\\obj\\",
+      "outputPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7949,11 +7949,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {
-              "projectPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj"
+            "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj": {
+              "projectPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase.Core\\ClayTestCase.Core.csproj"
             },
-            "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase\\ClayTestCase.API.csproj": {
-              "projectPath": "C:\\Users\\hp\\source\\repos\\ClayTestCase\\ClayTestCase\\ClayTestCase.API.csproj"
+            "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase\\ClayTestCase.API.csproj": {
+              "projectPath": "C:\\Users\\hp\\Source\\Repos\\ClayTestCase\\ClayTestCase\\ClayTestCase.API.csproj"
             }
           }
         }

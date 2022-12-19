@@ -10,6 +10,5 @@ namespace ClayTestCase.Core.Services.Interfaces
     public interface IDoorService
     {
         Task<bool> OpenDoor(int doorId, string role);
-       // Task<bool> CreateDoor(CreateDoorDto model);
     }
 }

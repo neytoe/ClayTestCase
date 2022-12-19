@@ -33,9 +33,6 @@ namespace ClayTestCase.API.Controllers
             return BadRequest("An error Occured");
         }
 
-    }
-
-
-       
+    }      
     
 }
